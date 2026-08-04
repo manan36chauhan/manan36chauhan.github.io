@@ -34,6 +34,60 @@
   }
 
 </style>
+
+<style>
+  /* Scroll-reveal for project cards */
+  #main article {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  #main article.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Lift effect on project images and buttons */
+  #main article .image.fit img,
+  #main article svg {
+    transition: transform 0.4s ease;
+  }
+  #main article:hover .image.fit img,
+  #main article:hover svg {
+    transform: scale(1.03);
+  }
+
+  .actions .button {
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  .actions .button:hover {
+    transform: translateY(-3px);
+  }
+
+  /* Animated underline on nav links */
+  #nav .links a {
+    position: relative;
+  }
+  #nav .links a::after {
+    content: "";
+    position: absolute;
+    left: 0; bottom: -4px;
+    width: 0; height: 2px;
+    background: currentColor;
+    transition: width 0.3s ease;
+  }
+  #nav .links a:hover::after {
+    width: 100%;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #main article {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+  }
+</style>
 		
 	</head>
 	
@@ -358,6 +412,7 @@
 									</header>
 									<a href="#" class="image fit"><img src="images/pic06.jpg" alt="" /></a>
 									<p>This is desktop based application executable file can be run with Any OS.I have created this by using Advance java and swing FX framework.<br>Associated with Maharaja Krishnakumarsinhji Bhavnagar University
+
 										Used Technology and tools: Netbeans IDE
 										Programming Lang: Advance Java
 										Framework: SwingFX
@@ -374,6 +429,7 @@
 									</header>
 									<a href="#" class="image fit"><img src="images/pic08.jpg" alt="" /></a>
 									<p>This web site is created using php,javascript,bootstrap,mysql.in this web site i have explained about the career path that you want to choose according to your interest and ability.<br>Associated with Maharaja Krishnakumarsinhji Bhavnagar University
+
 										Used Technology and Tools :PHP,Javascript ,CSS,Bootstrap
 										Server :Xampp,Wamp
 										Database: Mysql
@@ -484,5 +540,19 @@
 				const app = initializeApp(firebaseConfig);
 				const analytics = getAnalytics(app);
 			</script>
+
+	<script>
+	  document.addEventListener('DOMContentLoaded', function () {
+	    var articles = document.querySelectorAll('#main article');
+	    var observer = new IntersectionObserver(function (entries) {
+	      entries.forEach(function (entry) {
+	        if (entry.isIntersecting) {
+	          entry.target.classList.add('is-visible');
+	        }
+	      });
+	    }, { threshold: 0.15 });
+	    articles.forEach(function (el) { observer.observe(el); });
+	  });
+	</script>
 	</body>
 </html>
